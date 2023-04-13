@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutoCompleteController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\ExportImportController;
 use App\Http\Controllers\PDFController;
@@ -27,3 +28,6 @@ Route::get('/export-user', [ExportImportController::class,'export']);
 Route::post('/import-user', [ExportImportController::class,'import']);
 
 Route::get('/generate-pdf', [PDFController::class,'index']);
+
+Route::get('/autocomplete', [AutoCompleteController::class,'index']);
+Route::get('/autocomplete-data', [AutoCompleteController::class,'data'])->name('data.autocomplete');
