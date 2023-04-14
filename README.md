@@ -4,3 +4,4 @@
    - Implementing Import Export to Excel (XLSX File)
    - Learn Generate PDF
    - Add Autocomplete With Typeahead JS
+   - Learn Auth Google & Github With Socialite
