@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\AutoCompleteController;
-use App\Http\Controllers\DashboardUserController;
-use App\Http\Controllers\ExportImportController;
-use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/chart', [DashboardUserController::class, 'index']);
+Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider']);
+Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
 
-Route::get('/export-import', [ExportImportController::class,'index']);
-Route::get('/export-user', [ExportImportController::class,'export']);
-Route::post('/import-user', [ExportImportController::class,'import']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/generate-pdf', [PDFController::class,'index']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/autocomplete', [AutoCompleteController::class,'index']);
-Route::get('/autocomplete-data', [AutoCompleteController::class,'data'])->name('data.autocomplete');
+require __DIR__.'/auth.php';
+
