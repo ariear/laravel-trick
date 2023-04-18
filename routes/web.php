@@ -4,6 +4,7 @@ use App\Http\Controllers\AutoCompleteController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\ExportImportController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\MailExamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,5 @@ Route::get('/generate-pdf', [PDFController::class,'index']);
 
 Route::get('/autocomplete', [AutoCompleteController::class,'index']);
 Route::get('/autocomplete-data', [AutoCompleteController::class,'data'])->name('data.autocomplete');
+
+Route::get('/send-mail', [MailExamController::class, 'index']);

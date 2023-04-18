@@ -5,3 +5,4 @@
    - Learn Generate PDF
    - Add Autocomplete With Typeahead JS
    - Learn Auth Google & Github With Socialite
+   - Learn Send Mail with smtp (MailTrap)
