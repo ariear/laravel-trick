@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutoCompleteController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\ExportImportController;
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/register', [AuthController::class,'register']);
+Route::post('/register', [AuthController::class,'store']);
 
 Route::get('/chart', [DashboardUserController::class, 'index']);
 
