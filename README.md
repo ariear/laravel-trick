@@ -7,4 +7,4 @@
    - Learn Auth Google & Github With Socialite
    - Learn Send Mail with smtp (MailTrap)
    - Learn Implementing RecaptchaV2 & RecaptchaV3
-   - Learn Email Verification 
+   - Learn Email Verification with custom template email
