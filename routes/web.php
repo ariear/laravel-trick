@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\auth\OtpController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('/auth/register', [AuthController::class, 'register']);
     Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+
+    Route::get('/otp/verify', [OtpController::class, 'index']);
+    Route::post('/otp/verify', [OtpController::class, 'store']);
+
     Route::post('/auth/register', [AuthController::class, 'register_action']);
     Route::post('/auth/login', [AuthController::class, 'login_action']);
 });

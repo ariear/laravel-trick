@@ -25,6 +25,10 @@
                                             placeholder="example@user.com">
                                     </div>
                                     <div class="col-12">
+                                        <label for="wa_number" class="form-label">Wa Number</label>
+                                        <input type="text" name="wa_number" class="form-control" id="wa_number">
+                                    </div>
+                                    <div class="col-12">
                                         <label for="inputChoosePassword" class="form-label">Password</label>
                                         <div class="input-group" id="show_hide_password">
                                             <input type="password" name="password" class="form-control border-end-0"

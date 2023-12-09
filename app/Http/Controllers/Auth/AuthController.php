@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Otp;
 
 class AuthController extends Controller
 {
@@ -23,12 +24,14 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
+            'wa_number' => 'required',
             'password' => 'required|string|min:8'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'wa_number' => $request->wa_number,
             'password' => Hash::make($request->password)
         ]);
 
@@ -41,14 +44,20 @@ class AuthController extends Controller
     }
 
     public function login_action(Request $request) {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/dashboard');
+        $user = User::where('email', $request->email)->first();
+        if($user) {
+            if (Hash::check($request->password, $user->password)) {
+                $otp = new Otp;
+                $otp_token = $otp->generate($user->id, 6, 15);
+                // dd($otp_token->token);
+
+                return redirect('/otp/verify');
+            }
         }
 
         return back()->withErrors([
