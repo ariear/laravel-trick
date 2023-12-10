@@ -29,8 +29,10 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/auth/register', [AuthController::class, 'register']);
     Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 
-    Route::get('/otp/verify', [OtpController::class, 'index']);
+    // sebenarnya gak usah pake param user_id sih, tapi gpp dah
+    Route::get('/otp/verify/{user_id}', [OtpController::class, 'index']);
     Route::post('/otp/verify', [OtpController::class, 'store']);
+    Route::post('/otp/resend/{user_id}', [OtpController::class, 'resend']);
 
     Route::post('/auth/register', [AuthController::class, 'register_action']);
     Route::post('/auth/login', [AuthController::class, 'login_action']);

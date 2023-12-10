@@ -12,6 +12,7 @@
                                     @csrf
                                     <h4>Verify</h4>
                                     <p>Your code was sent to you via whatsapp</p>
+                                    <input type="hidden" name="id" value="{{$user_id}}">
 
                                     <div class="otp-field mb-4">
                                         <input type="number" name="code1" />
@@ -26,10 +27,10 @@
                                         Verify
                                     </button>
 
-                                    <p class="resend text-muted mb-0">
-                                        Didn't receive code? <a href="">Request again</a>
-                                    </p>
                                 </form>
+                                <p class="resend text-muted mb-0">
+                                    Didn't receive code? <form method="POST" action="/otp/resend/{{$user_id}}">@csrf<button type="submit">Request again</button></form>
+                                </p>
                             </div>
                         </div>
                     </div>
